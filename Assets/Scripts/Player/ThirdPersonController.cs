@@ -48,6 +48,9 @@ namespace StarterAssets
 
         private const float _threshold = 0.01f;
 
+        //TEST PURPOSES
+        [SerializeField] private GameObject objectToLook;
+
         private void Awake()
         {
             _mainCamera = Camera.main.gameObject;

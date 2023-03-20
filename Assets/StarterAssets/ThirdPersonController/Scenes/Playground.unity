@@ -2109,7 +2109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699996232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.49, y: 0.49, z: 16.39}
+  m_LocalPosition: {x: -3.49, y: 1.38, z: 16.39}
   m_LocalScale: {x: 7.32802, y: 3.3934393, z: 9.438732}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2423,7 +2423,7 @@ PrefabInstance:
     - target: {fileID: 6751388636123340836, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8890774966862588244, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
@@ -2464,6 +2464,7 @@ MonoBehaviour:
   objectToPool: {fileID: 8359729237774586385, guid: 1a871709493ca68478fef474ebe67c1c,
     type: 3}
   poolSize: 30
+  enemyRuntimeSet: {fileID: 11400000, guid: a0805811148767a47bb9430f260f3794, type: 2}
 --- !u!4 &2079866401
 Transform:
   m_ObjectHideFlags: 0

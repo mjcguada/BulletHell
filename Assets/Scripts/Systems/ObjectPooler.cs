@@ -7,6 +7,8 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField] private GameObject objectToPool;
     [SerializeField] private int poolSize = 30;
 
+    [SerializeField] private RuntimeSet<GameObject> enemyRuntimeSet;
+
     private GameObject[] poolObject;
 
     private void Start()
@@ -18,12 +20,15 @@ public class ObjectPooler : MonoBehaviour
             return;
         }
 
+        enemyRuntimeSet.Initialize(); //Important to clear existing list
+
         poolObject = new GameObject[poolSize];
 
         for (int i = 0; i < poolSize; i++)
         {
             poolObject[i] = Instantiate(objectToPool);
             poolObject[i].SetActive(false);
+            enemyRuntimeSet.AddToList(poolObject[i]);
         }
     }
 
@@ -61,6 +66,7 @@ public class ObjectPooler : MonoBehaviour
         {
             newPool[i] = Instantiate(objectToPool);
             newPool[i].SetActive(false);
+            enemyRuntimeSet.AddToList(newPool[i]);
         }
 
         poolObject = newPool;
