@@ -25,17 +25,6 @@ public class ObjectPooler : MonoBehaviour
             poolObject[i] = Instantiate(objectToPool);
             poolObject[i].SetActive(false);
         }
-
-        StartCoroutine(CoroutineTest());
-    }
-
-    IEnumerator CoroutineTest() 
-    {
-        while (gameObject.activeSelf) 
-        {
-            GetObject();
-            yield return new WaitForSeconds(1);
-        }
     }
 
     public GameObject GetObject()
