@@ -44,8 +44,6 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
-        private PlayerInputActions inputActions;
-
         private void Awake()
         {
             _mainCamera = Camera.main.gameObject;
@@ -62,26 +60,12 @@ namespace StarterAssets
 
         private void Start()
         {
-            inputActions = new PlayerInputActions();
-            inputActions.Player.Shoot.performed += ctx => PlayerOrientation();
-            inputActions.Enable();
-
             _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
 
             AssignAnimationIDs();
-        }
-
-        private void OnEnable()
-        {
-            if (inputActions != null) inputActions.Enable();
-        }
-
-        private void OnDisable()
-        {
-            if (inputActions != null) inputActions.Disable();
         }
 
         private void Update()
@@ -161,20 +145,8 @@ namespace StarterAssets
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * speedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-            // normalise input direction
+            //Normalize input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
-            // Player looking at the direction they're moving
-            //if (_input.move != Vector2.zero)
-            //{
-            //    _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-            //                      _mainCamera.transform.eulerAngles.y;
-            //    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-            //        rotationSmoothTime);
-
-            //    // rotate to face input direction relative to camera position
-            //    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-            //}
 
             Vector3 targetDirection = _mainCamera.transform.TransformDirection(inputDirection);
             targetDirection.y = 0;
