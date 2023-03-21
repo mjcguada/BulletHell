@@ -4,9 +4,7 @@ using UnityEngine.InputSystem;
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM 
-    [RequireComponent(typeof(PlayerInput))]
-#endif
+
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
@@ -93,11 +91,11 @@ namespace StarterAssets
         private void CameraRotation()
         {
             // if there is an input and camera position is not fixed
-            if (_input.look.sqrMagnitude >= _threshold && !lockCameraPosition)
-            {
-                _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
-                _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
-            }
+            //if (_input.look.sqrMagnitude >= _threshold && !lockCameraPosition)
+            //{
+            //    _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
+            //    _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
+            //}
 
             // clamp our rotations so our values are limited 360 degrees
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
@@ -105,6 +103,10 @@ namespace StarterAssets
             // Cinemachine will follow this target
             cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + cameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
+
+            Vector3 targetPosition = objectToLook.transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
         }
 
         private void Move()
@@ -144,7 +146,7 @@ namespace StarterAssets
 
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-            
+
             // Player looking at the direction they're moving
             //if (_input.move != Vector2.zero)
             //{
@@ -157,8 +159,6 @@ namespace StarterAssets
             //    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             //}
 
-
-            //Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
             Vector3 targetDirection = _mainCamera.transform.TransformDirection(inputDirection);
             targetDirection.y = 0;
 
