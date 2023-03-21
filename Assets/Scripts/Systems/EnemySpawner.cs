@@ -48,7 +48,8 @@ public class EnemySpawner : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = spawnerColor;
-        Gizmos.DrawCube(transform.position, transform.localScale);
+        Gizmos.matrix = transform.localToWorldMatrix; //This way we have the gizmos oriented too
+        Gizmos.DrawCube(Vector3.zero, Vector3.one);
     }
 #endif
 

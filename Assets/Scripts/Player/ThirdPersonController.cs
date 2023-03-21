@@ -115,7 +115,7 @@ namespace StarterAssets
         }
 
         private void PlayerOrientation()
-        {
+        {            
             Enemy target = EnemyManager.Instance.GetNearestEnemy(transform.position);
 
             if (target != null)
