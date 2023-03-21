@@ -5,7 +5,7 @@ namespace StarterAssets
     public class UICanvasControllerInput : MonoBehaviour
     {
         [Header("Output")]
-        public StarterAssetsInputs starterAssetsInputs;
+        [SerializeField] private StarterAssetsInputs starterAssetsInputs;
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)
         {
@@ -17,9 +17,9 @@ namespace StarterAssets
             starterAssetsInputs.LookInput(virtualLookDirection);
         }
 
-        public void VirtualJumpInput(bool virtualJumpState)
+        public void VirtualShootInput(bool virtualShootState)
         {
-            //starterAssetsInputs.JumpInput(virtualJumpState);
+            starterAssetsInputs.ShootInput(virtualShootState);
         }
 
         public void VirtualSprintInput(bool virtualSprintState)

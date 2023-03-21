@@ -10,6 +10,7 @@ namespace StarterAssets
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
+		public bool shoot;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -31,6 +32,13 @@ namespace StarterAssets
 				LookInput(value.Get<Vector2>());
 			}
 		}
+
+		public void OnShoot(InputValue value)
+		{
+			ShootInput(value.isPressed);
+		}
+
+
 #endif
 
 		public void MoveInput(Vector2 newMoveDirection)
@@ -43,15 +51,20 @@ namespace StarterAssets
 			look = newLookDirection;
 		}
 
-		private void OnApplicationFocus(bool hasFocus)
+		public void ShootInput(bool newShootState)
 		{
-			SetCursorState(cursorLocked);
+			shoot = newShootState;
 		}
 
-		private void SetCursorState(bool newState)
-		{
-			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-		}
+		//private void OnApplicationFocus(bool hasFocus)
+		//{
+		//	SetCursorState(cursorLocked);
+		//}
+
+		//private void SetCursorState(bool newState)
+		//{
+		//	Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		//}
 	}
 	
 }

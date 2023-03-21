@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
@@ -9,6 +8,7 @@ namespace StarterAssets
     {
         [Header("Player")]
         [SerializeField] private float moveSpeed = 5.0f;
+        [SerializeField] private float moveSpeedShooting = 2.5f;
         [SerializeField] private float speedChangeRate = 10.0f;
 
         [Tooltip("How fast the character turns to face movement direction")]
@@ -44,17 +44,15 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
-        private const float _threshold = 0.01f;
-
-        //TEST PURPOSES
-        [SerializeField] private GameObject objectToLook;
+        private PlayerInputActions inputActions;
 
         private void Awake()
         {
             _mainCamera = Camera.main.gameObject;
             _animator = GetComponent<Animator>();
+
 #if UNITY_EDITOR
-            if (_animator == null) 
+            if (_animator == null)
             {
                 Debug.LogError("Couldn't find an animator on Player");
                 Destroy(this);
@@ -64,17 +62,35 @@ namespace StarterAssets
 
         private void Start()
         {
+            inputActions = new PlayerInputActions();
+            inputActions.Player.Shoot.performed += ctx => PlayerOrientation();
+            inputActions.Enable();
+
             _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
 
             AssignAnimationIDs();
         }
 
+        private void OnEnable()
+        {
+            if (inputActions != null) inputActions.Enable();
+        }
+
+        private void OnDisable()
+        {
+            if (inputActions != null) inputActions.Disable();
+        }
+
         private void Update()
         {
             Move();
+            if (_input.shoot)
+            {
+                PlayerOrientation();
+            }
         }
 
         private void LateUpdate()
@@ -90,29 +106,30 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
-            // if there is an input and camera position is not fixed
-            //if (_input.look.sqrMagnitude >= _threshold && !lockCameraPosition)
-            //{
-            //    _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
-            //    _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
-            //}
-
             // clamp our rotations so our values are limited 360 degrees
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
 
             // Cinemachine will follow this target
             cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + cameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
+        }
 
-            Vector3 targetPosition = objectToLook.transform.position;
-            targetPosition.y = transform.position.y;
-            transform.LookAt(targetPosition);
+        private void PlayerOrientation()
+        {
+            Enemy target = EnemyManager.Instance.GetNearestEnemy(transform.position);
+
+            if (target != null)
+            {
+                Vector3 targetPosition = target.transform.position;
+                targetPosition.y = transform.position.y;
+                transform.LookAt(targetPosition);
+            }
         }
 
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = moveSpeed;
+            float targetSpeed = _input.shoot ? moveSpeedShooting : moveSpeed;
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0

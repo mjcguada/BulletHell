@@ -1,39 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
 {
-    [SerializeField] private GameObject objectToPool;
-    [SerializeField] private int poolSize = 30;
+    private T objectToPool;
+    private int poolSize = 30;
 
-    private GameObject[] poolObject;
+    private T[] poolObject;
 
-    private void Awake()
+    public ObjectPooler(T prefab, int poolSize)
     {
-        if (objectToPool == null || poolSize <= 0)
-        {
-            Destroy(this);
-            Destroy(gameObject);
-            return;
-        }
+        objectToPool = prefab;
+        this.poolSize = poolSize;
 
-        poolObject = new GameObject[poolSize];
+        if (poolSize <= 0) return;        
+
+        poolObject = new T[poolSize];
 
         for (int i = 0; i < poolSize; i++)
         {
             poolObject[i] = Instantiate(objectToPool);
-            poolObject[i].SetActive(false);
+            poolObject[i].gameObject.SetActive(false);
         }
     }
 
-    public GameObject GetObject()
+    public T GetObject()
     {
         for (int i = 0; i < poolObject.Length; i++)
         {
-            if (!poolObject[i].activeInHierarchy)
+            if (!poolObject[i].gameObject.activeInHierarchy)
             {
-                poolObject[i].SetActive(true);
                 return poolObject[i];
             }
         }
@@ -49,7 +44,7 @@ public class ObjectPooler : MonoBehaviour
         int oldPoolSize = poolSize;
         poolSize = poolSize * 2;
 
-        GameObject[] newPool = new GameObject[poolSize];
+        T[] newPool = new T[poolSize];
 
         //We make a copy of the old pool
         for (int i = 0; i < poolObject.Length; i++)
@@ -60,9 +55,9 @@ public class ObjectPooler : MonoBehaviour
         for (int i = oldPoolSize; i < poolSize; i++)
         {
             newPool[i] = Instantiate(objectToPool);
-            newPool[i].SetActive(false);
+            newPool[i].gameObject.SetActive(false);
         }
-        
+
         //The new pool becomes the current pool but with double size
         poolObject = newPool;
     }
