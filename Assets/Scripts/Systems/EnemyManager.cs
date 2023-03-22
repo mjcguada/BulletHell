@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        enemyPool = new ObjectPooler<Enemy>(enemyPrefab, 20);
+        enemyPool = new ObjectPooler<Enemy>(transform, enemyPrefab, 20);
     }
 
     public Enemy GetEnemy()

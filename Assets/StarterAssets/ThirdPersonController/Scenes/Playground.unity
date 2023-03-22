@@ -1701,7 +1701,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1221041499
 PrefabInstance:
@@ -1990,7 +1990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018d7890aa3823c48afb3924dbe02944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerColor: {r: 0, g: 1, b: 0, a: 0.59607846}
+  spawnerColor: {r: 0, g: 1, b: 0, a: 0.4392157}
   frequenceInSeconds: 1
 --- !u!65 &1489324723
 BoxCollider:
@@ -2147,7 +2147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018d7890aa3823c48afb3924dbe02944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerColor: {r: 0, g: 1, b: 0, a: 0.59607846}
+  spawnerColor: {r: 0, g: 1, b: 0, a: 0.4392157}
   frequenceInSeconds: 1
 --- !u!65 &1699996234
 BoxCollider:
@@ -2175,7 +2175,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1709044206 stripped
 GameObject:
@@ -2485,6 +2485,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI_Canvas_StarterAssetsInputs_Joysticks
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751388636123340836, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}

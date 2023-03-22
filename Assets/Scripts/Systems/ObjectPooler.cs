@@ -7,9 +7,12 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
 
     private T[] poolObject;
 
-    public ObjectPooler(T prefab, int poolSize)
+    private Transform parentTransform;
+
+    public ObjectPooler(Transform parentTransform, T prefab, int poolSize)
     {
         objectToPool = prefab;
+        this.parentTransform = parentTransform;
         this.poolSize = poolSize;
 
         if (poolSize <= 0) return;        
@@ -18,9 +21,17 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
 
         for (int i = 0; i < poolSize; i++)
         {
-            poolObject[i] = Instantiate(objectToPool);
-            poolObject[i].gameObject.SetActive(false);
+            poolObject[i] = Create();
         }
+    }
+
+    private T Create() 
+    {
+        T newObject = Instantiate(objectToPool);
+        newObject.transform.SetParent(parentTransform);
+        newObject.gameObject.SetActive(false);
+
+        return newObject;
     }
 
     public T GetObject()
@@ -54,8 +65,7 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
 
         for (int i = oldPoolSize; i < poolSize; i++)
         {
-            newPool[i] = Instantiate(objectToPool);
-            newPool[i].gameObject.SetActive(false);
+            newPool[i] = Create();
         }
 
         //The new pool becomes the current pool but with double size
