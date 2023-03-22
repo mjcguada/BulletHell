@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
+public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour, IReseteable
 {
     private T objectToPool;
     private int poolSize = 30;
-
-    private T[] poolObject;
+    private T[] pool;
 
     private Transform parentTransform;
 
@@ -15,17 +14,17 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
         this.parentTransform = parentTransform;
         this.poolSize = poolSize;
 
-        if (poolSize <= 0) return;        
+        if (poolSize <= 0) return;
 
-        poolObject = new T[poolSize];
+        pool = new T[poolSize];
 
         for (int i = 0; i < poolSize; i++)
         {
-            poolObject[i] = Create();
+            pool[i] = Create();
         }
     }
 
-    private T Create() 
+    private T Create()
     {
         T newObject = Instantiate(objectToPool);
         newObject.transform.SetParent(parentTransform);
@@ -36,11 +35,11 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
 
     public T GetObject()
     {
-        for (int i = 0; i < poolObject.Length; i++)
+        for (int i = 0; i < pool.Length; i++)
         {
-            if (!poolObject[i].gameObject.activeInHierarchy)
+            if (!pool[i].gameObject.activeInHierarchy)
             {
-                return poolObject[i];
+                return pool[i];
             }
         }
 
@@ -48,6 +47,14 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
         ExpandPoolSize();
 
         return GetObject();
+    }
+
+    public void ResetObjects()
+    {
+        for (int i = 0; i < pool.Length; i++)
+        {
+            pool[i].Reset();
+        }
     }
 
     private void ExpandPoolSize()
@@ -58,9 +65,9 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
         T[] newPool = new T[poolSize];
 
         //We make a copy of the old pool
-        for (int i = 0; i < poolObject.Length; i++)
+        for (int i = 0; i < pool.Length; i++)
         {
-            newPool[i] = poolObject[i];
+            newPool[i] = pool[i];
         }
 
         for (int i = oldPoolSize; i < poolSize; i++)
@@ -69,6 +76,6 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour
         }
 
         //The new pool becomes the current pool but with double size
-        poolObject = newPool;
+        pool = newPool;
     }
 }

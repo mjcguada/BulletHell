@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IReseteable
 {
     private NavMeshAgent navMeshAgent;
     private PlayerHealth playerReference;
@@ -35,13 +35,16 @@ public class Enemy : MonoBehaviour
     public void AssignPlayerReference(PlayerHealth playerReference)
     {
         this.playerReference = playerReference;
-    }
+    }    
 
+    public void Reset()
+    {
+        gameObject.SetActive(false);
+    }
 
     private void OnDisable()
     {
         StopAllCoroutines(); //TODO: Revisar
         EnemyManager.Instance.RemoveFromActiveEnemies(this);
     }
-
 }
