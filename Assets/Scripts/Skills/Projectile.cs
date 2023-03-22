@@ -25,15 +25,9 @@ public class Projectile : MonoBehaviour, IReseteable
         Reset();
     }
 
-    private void OnEnable() 
-    {
-        trailRenderer.Clear();
-        trailRenderer.enabled = true;
-    }
-
     public void Reset()
     {
-        trailRenderer.enabled = false;
+        trailRenderer.Clear();
         myRigidbody.velocity = Vector3.zero;
         gameObject.SetActive(false);
     }
