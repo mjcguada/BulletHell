@@ -6,8 +6,15 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IReseteable
 {
+    [Tooltip("The point the player will be shooting")]
+    [SerializeField] private Transform targetTransform;
+
     private NavMeshAgent navMeshAgent;
     private PlayerHealth playerReference;
+    public Vector3 TargetPosition => targetTransform.position;
+
+    //TODO: establish from the EnemyManager
+    private int health = 1;
 
     private void Awake()
     {
@@ -17,6 +24,18 @@ public class Enemy : MonoBehaviour, IReseteable
     private void OnEnable()
     {
         StartCoroutine(FollowPlayerCoroutine());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Projectile>() != null)
+        {
+            health--;
+            if (health <= 0)
+            {
+                Reset();
+            }
+        }
     }
 
     private IEnumerator FollowPlayerCoroutine()
@@ -35,7 +54,7 @@ public class Enemy : MonoBehaviour, IReseteable
     public void AssignPlayerReference(PlayerHealth playerReference)
     {
         this.playerReference = playerReference;
-    }    
+    }
 
     public void Reset()
     {

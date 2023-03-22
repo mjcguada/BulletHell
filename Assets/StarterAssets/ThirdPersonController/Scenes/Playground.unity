@@ -1991,7 +1991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerColor: {r: 0, g: 1, b: 0, a: 0.4392157}
-  frequenceInSeconds: 1
+  frequenceInSeconds: 2
 --- !u!65 &1489324723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2148,7 +2148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerColor: {r: 0, g: 1, b: 0, a: 0.4392157}
-  frequenceInSeconds: 1
+  frequenceInSeconds: 2
 --- !u!65 &1699996234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2268,11 +2268,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544,
-        type: 3}
-      propertyPath: objectToLook
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}

@@ -11,16 +11,12 @@ namespace StarterAssets
         [SerializeField] private float moveSpeedShooting = 2.5f;
         [SerializeField] private float speedChangeRate = 10.0f;
 
-        [Tooltip("How fast the character turns to face movement direction")]
-        [Range(0.0f, 0.3f)]
-        [SerializeField] private float rotationSmoothTime = 0.12f;
+        [SerializeField] private ShooterComponent shooterComponent;
+        [SerializeField] private float shootForce = 10f;
 
         [Header("Cinemachine")]
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         [SerializeField] private GameObject cinemachineCameraTarget;
-
-        [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
-        [SerializeField] private float cameraAngleOverride = 0.0f;
 
         [Tooltip("For locking the camera position on all axis")]
         [SerializeField] private bool lockCameraPosition = false;
@@ -32,8 +28,6 @@ namespace StarterAssets
         // player
         private float _speed;
         private float _animationBlend;
-        private float _targetRotation = 0.0f;
-        private float _rotationVelocity;
 
         // animation IDs
         private int _animIDSpeed;
@@ -72,7 +66,7 @@ namespace StarterAssets
         {
             Move();
             if (_input.shoot)
-            {
+            {                
                 PlayerOrientation();
             }
         }
@@ -94,17 +88,21 @@ namespace StarterAssets
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
 
             // Cinemachine will follow this target
-            cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + cameraAngleOverride,
-                _cinemachineTargetYaw, 0.0f);
+            cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
         }
 
+        //TODO: RENAME FUNCTION
         private void PlayerOrientation()
         {            
             Enemy target = EnemyManager.Instance.GetNearestEnemy(transform.position);
 
+            //TODO: raycast if player can see the enemy
             if (target != null)
             {
-                Vector3 targetPosition = target.transform.position;
+                Vector3 targetPosition = target.TargetPosition;
+
+                shooterComponent.Shoot(targetPosition, shootForce);
+
                 targetPosition.y = transform.position.y;
                 transform.LookAt(targetPosition);
             }

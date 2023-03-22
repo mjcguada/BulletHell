@@ -1919,6 +1919,7 @@ GameObject:
   - component: {fileID: 8701746826692198809}
   - component: {fileID: 57335899406140907}
   - component: {fileID: 3384832041774642662}
+  - component: {fileID: 5536663767690856450}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -1975,6 +1976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82c78af44bc45b4ca248da0179e5421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTransform: {fileID: 9164975267353481122}
 --- !u!195 &3384832041774642662
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1997,6 +1999,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &5536663767690856450
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359729237774586385}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &8393349092267761695
 GameObject:
   m_ObjectHideFlags: 0
