@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [Header("Scene references")]
     [SerializeField] private PlayerHealth playerReference;
+    
+    [Header("Prefabs")]
     [SerializeField] private Enemy enemyPrefab;
 
     private ObjectPooler<Enemy> enemyPool;

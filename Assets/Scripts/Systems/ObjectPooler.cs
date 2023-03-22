@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour, IReseteable
+public class ObjectPooler<T> where T : MonoBehaviour, IReseteable
 {
-    private T objectToPool;
+    private T prefab;
     private int poolSize = 30;
     private T[] pool;
+
+    private int index = 0;
 
     private Transform parentTransform;
 
     public ObjectPooler(Transform parentTransform, T prefab, int poolSize)
     {
-        objectToPool = prefab;
+        this.prefab = prefab;
         this.parentTransform = parentTransform;
         this.poolSize = poolSize;
 
@@ -26,9 +28,12 @@ public class ObjectPooler<T> : MonoBehaviour where T : MonoBehaviour, IReseteabl
 
     private T Create()
     {
-        T newObject = Instantiate(objectToPool);
+        T newObject = GameObject.Instantiate(prefab);
+        newObject.gameObject.name = prefab.name + index.ToString();
         newObject.transform.SetParent(parentTransform);
         newObject.gameObject.SetActive(false);
+
+        index++;
 
         return newObject;
     }
