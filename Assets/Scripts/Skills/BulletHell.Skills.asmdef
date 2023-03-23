@@ -1,0 +1,16 @@
+{
+    "name": "BulletHell.Skills",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7e41ecd5313bd6144a92b88aef0ace6f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

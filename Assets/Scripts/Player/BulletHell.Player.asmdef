@@ -1,0 +1,17 @@
+{
+    "name": "BulletHell.Player",
+    "rootNamespace": "",
+    "references": [
+        "GUID:67a6cf33ab8a0254ca7dbf0ee5e2bb54",
+        "GUID:999972032d969cf4a85f5f0ec0ea0e1a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
