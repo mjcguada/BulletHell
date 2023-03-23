@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -17,7 +15,7 @@ public class Projectile : MonoBehaviour, IReseteable
 
     public void Shoot(Vector3 direction, float force) 
     {
-        myRigidbody.velocity = new Vector3(direction.x, direction.y, direction.z) * force;
+        myRigidbody.velocity = direction * force;
     }
 
     void OnCollisionEnter(Collision collision)

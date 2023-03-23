@@ -31,6 +31,7 @@ public class ShooterComponent : MonoBehaviour
 
         Debug.DrawLine(spawnPoint.transform.position, spawnPoint.transform.position + (direction * 5f), Color.green);
 
+        //The timer is always increasing, so every time the player shoots we reset the timer
         if (elapsedTime >= fireRate)
         {
             Projectile projectile = projectilePool.GetObject();

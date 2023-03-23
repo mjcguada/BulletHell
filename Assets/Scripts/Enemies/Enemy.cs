@@ -6,15 +6,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IReseteable
 {
-    [Tooltip("The point the player will be shooting")]
-    [SerializeField] private Transform targetTransform;
-
     private NavMeshAgent navMeshAgent;
     private PlayerHealth playerReference;
-    public Vector3 TargetPosition => targetTransform.position;
 
     //TODO: establish from the EnemyManager
-    private int health = 1;
+    private int health = 4;
 
     private void Awake()
     {

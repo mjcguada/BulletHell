@@ -1117,8 +1117,13 @@ MonoBehaviour:
   moveSpeedShooting: 2.5
   speedChangeRate: 10
   shooterComponent: {fileID: 2511583926097118848}
+  shootForce: 10
+  checkSphereRadius: 8.5
+  checkForEnemiesFrequency: 0.2
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 256
   cinemachineCameraTarget: {fileID: 8338988566280778634}
-  lockCameraPosition: 0
 --- !u!114 &135756642000475821
 MonoBehaviour:
   m_ObjectHideFlags: 0
