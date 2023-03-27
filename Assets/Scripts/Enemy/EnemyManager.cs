@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager Instance;
+
     [Header("Scene references")]
     [SerializeField] private PlayerHealth playerReference;
     
@@ -11,10 +13,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Enemy enemyPrefab;
 
     private ObjectPooler<Enemy> enemyPool;
-
-    public static EnemyManager Instance;
-
     private List<Enemy> activeEnemies = new List<Enemy>();
+
+    public PlayerHealth PlayerReference => playerReference ??= FindObjectOfType<PlayerHealth>();
 
     private void Awake()
     {
@@ -25,7 +26,7 @@ public class EnemyManager : MonoBehaviour
     public Enemy GetEnemy()
     {
         Enemy enemy = enemyPool.GetObject();
-        enemy.AssignPlayerReference(playerReference);
+        enemy.AssignPlayerReference(PlayerReference);
         enemy.gameObject.SetActive(true);
 
         AddToActiveEnemies(enemy);

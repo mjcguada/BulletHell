@@ -8,14 +8,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Color spawnerColor = Color.green;
     [SerializeField] private float frequenceInSeconds = 1.0f;
 
-    private BoxCollider collider = null;
+    private BoxCollider myCollider = null;
 
     private float groundPosition = 0;
 
     private void Awake()
     {
-        collider = gameObject.GetComponent<BoxCollider>();
-        collider.isTrigger = true;
+        myCollider = gameObject.GetComponent<BoxCollider>();
+        myCollider.isTrigger = true;
     }
 
     private void Start()
@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            Vector3 enemyPosition = Vector3.Lerp(collider.bounds.min, collider.bounds.max, Random.Range(0.0f, 1.0f));
+            Vector3 enemyPosition = Vector3.Lerp(myCollider.bounds.min, myCollider.bounds.max, Random.Range(0.0f, 1.0f));
             enemyPosition.y = groundPosition;
 
             Enemy newEnemy = EnemyManager.Instance.GetEnemy();

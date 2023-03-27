@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d36ae8809a2b2564199183a45bd57683, type: 3}
   m_Name: GameSceneCollection
   m_EditorClassIdentifier: 
-  scenes: []
+  scenes:
+  - sceneAsset: {fileID: 102900000, guid: d67c236f852d4d94489f385932a73748, type: 3}
+    sceneName: Scenes/MainGame
+  - sceneAsset: {fileID: 102900000, guid: 445a544ae46685141b4d21284cc128e6, type: 3}
+    sceneName: Scenes/RetroCity
