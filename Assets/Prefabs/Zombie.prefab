@@ -1920,6 +1920,7 @@ GameObject:
   - component: {fileID: 57335899406140907}
   - component: {fileID: 3384832041774642662}
   - component: {fileID: 5536663767690856450}
+  - component: {fileID: -3657024260090639981}
   m_Layer: 8
   m_Name: Zombie
   m_TagString: Untagged
@@ -2011,6 +2012,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &-3657024260090639981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359729237774586385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1517c98eca8c02848909efe0d302254e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageAmount:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 1a2ab9e4e35cabd4a9d0e68dea373bb4, type: 2}
 --- !u!1 &8393349092267761695
 GameObject:
   m_ObjectHideFlags: 0
