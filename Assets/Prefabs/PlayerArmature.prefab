@@ -1253,6 +1253,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e19d125563e6944c9995b2f1ff25be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: {fileID: 11400000, guid: 2b4ed20b1531ec4479ee869dd58cf865, type: 2}
+  ResetHealth: 1
+  StartingHealth:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 9c58618dad90a1043b3048852a7aa21d, type: 2}
 --- !u!114 &2511583926097118848
 MonoBehaviour:
   m_ObjectHideFlags: 0

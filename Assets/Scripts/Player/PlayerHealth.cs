@@ -11,23 +11,23 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public FloatVariable HP;
+    public FloatVariable Health;
 
-    public bool ResetHP;
+    public bool ResetHealth;
 
-    public FloatReference StartingHP;
+    public FloatReference StartingHealth;
 
     private void Start()
     {
-        if (ResetHP)
-            HP.SetValue(StartingHP);
+        if (ResetHealth)
+            Health.SetValue(StartingHealth);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         DamageDealer damage = other.gameObject.GetComponent<DamageDealer>();
         if (damage != null)
-            HP.ApplyChange(-damage.DamageAmount);
+            Health.ApplyChange(-damage.DamageAmount);
     }
 
 
