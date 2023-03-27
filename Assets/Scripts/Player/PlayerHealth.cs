@@ -8,14 +8,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
     public FloatVariable Health;
-
-    public bool ResetHealth;
-
+    public bool ResetHealth = true;
     public FloatReference StartingHealth;
+
+    [Header("Events")]
+    public UnityEvent DamageEvent;
+    public UnityEvent DeathEvent;
 
     private void Start()
     {
@@ -27,8 +30,14 @@ public class PlayerHealth : MonoBehaviour
     {
         DamageDealer damage = other.gameObject.GetComponent<DamageDealer>();
         if (damage != null)
+        {
             Health.ApplyChange(-damage.DamageAmount);
+            DamageEvent.Invoke();
+        }
+
+        if (Health.Value <= 0.0f)
+        {
+            DeathEvent.Invoke();
+        }
     }
-
-
 }

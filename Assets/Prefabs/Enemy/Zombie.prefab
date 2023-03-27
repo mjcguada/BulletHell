@@ -1921,6 +1921,7 @@ GameObject:
   - component: {fileID: 3384832041774642662}
   - component: {fileID: 5536663767690856450}
   - component: {fileID: -3657024260090639981}
+  - component: {fileID: 1491295230834174070}
   m_Layer: 8
   m_Name: Zombie
   m_TagString: Untagged
@@ -2028,6 +2029,34 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 1a2ab9e4e35cabd4a9d0e68dea373bb4, type: 2}
+--- !u!114 &1491295230834174070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359729237774586385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7904046d2cffcb4994984564e833886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f0cefb6a67ff5c643903f0deb4bbddc9, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8359729237774586385}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8393349092267761695
 GameObject:
   m_ObjectHideFlags: 0

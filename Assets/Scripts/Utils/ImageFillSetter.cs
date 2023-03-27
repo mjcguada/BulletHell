@@ -7,6 +7,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// Sets an Image component's fill amount to represent how far Variable is
@@ -26,11 +27,9 @@ public class ImageFillSetter : MonoBehaviour
     [Tooltip("Image to set the fill amount on.")]
     public Image Image;
 
-    //TODO: events
-
-    private void Update()
+    public void UpdateFillAmount() 
     {
         Image.fillAmount = Mathf.Clamp01(
-            Mathf.InverseLerp(Min, Max, Variable));
+                Mathf.InverseLerp(Min, Max, Variable));
     }
 }
