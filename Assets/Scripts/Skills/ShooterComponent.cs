@@ -20,6 +20,7 @@ public class ShooterComponent : MonoBehaviour
         projectilePool = new ObjectPooler<Projectile>(new GameObject("ProjectilePool").transform, projectilePrefab, 20);
     }
 
+    //I'm not a huge fan of the Update function but in this case it doesn't do any harm
     private void Update()
     {
         elapsedTime += Time.deltaTime;
