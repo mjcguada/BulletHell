@@ -1978,6 +1978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82c78af44bc45b4ca248da0179e5421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMaterial: {fileID: 2100000, guid: cfbd2b14bbe9a4e4e8d5b172bf37b51d, type: 2}
 --- !u!195 &3384832041774642662
 NavMeshAgent:
   m_ObjectHideFlags: 0

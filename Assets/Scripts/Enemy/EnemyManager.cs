@@ -5,16 +5,13 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
-
-    [Header("Scene references")]
-    [SerializeField] private PlayerHealth playerReference;
     
     [Header("Prefabs")]
     [SerializeField] private Enemy enemyPrefab;
 
     private ObjectPooler<Enemy> enemyPool;
-    private List<Enemy> activeEnemies = new List<Enemy>();
 
+    private PlayerHealth playerReference;
     public PlayerHealth PlayerReference => playerReference ??= FindObjectOfType<PlayerHealth>();
 
     private void Awake()
@@ -28,44 +25,6 @@ public class EnemyManager : MonoBehaviour
         Enemy enemy = enemyPool.GetObject();
         enemy.AssignPlayerReference(PlayerReference);
         enemy.gameObject.SetActive(true);
-
-        AddToActiveEnemies(enemy);
         return enemy;
-    }
-
-    private void AddToActiveEnemies(Enemy enemyToAdd)
-    {
-        if (!activeEnemies.Contains(enemyToAdd))
-        {
-            activeEnemies.Add(enemyToAdd);
-        }
-    }
-
-    public void RemoveFromActiveEnemies(Enemy enemyToRemove) 
-    {
-        if (activeEnemies.Contains(enemyToRemove)) 
-        {
-            activeEnemies.Remove(enemyToRemove);
-        }
-    }
-
-    public Enemy GetNearestEnemy(Vector3 position) 
-    {
-        float minDistance = float.MaxValue;
-        Enemy nearestEnemy = null;
-
-        for (int i = 0; i < activeEnemies.Count; i++)
-        {
-            Enemy currentEnemy = activeEnemies[i];
-            float distanceToPosition = Vector3.Distance(position, currentEnemy.transform.position);
-            
-            if (distanceToPosition < minDistance) 
-            {
-                nearestEnemy = currentEnemy;
-                minDistance = distanceToPosition;
-            }
-        }
-
-        return nearestEnemy;
     }
 }
