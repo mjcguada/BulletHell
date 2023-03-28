@@ -1812,8 +1812,8 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 4
-  m_SpotAngle: 61.187424
-  m_InnerSpotAngle: 28.669167
+  m_SpotAngle: 50.549255
+  m_InnerSpotAngle: 34.768837
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -3032,8 +3032,8 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 4
-  m_SpotAngle: 61.187424
-  m_InnerSpotAngle: 28.669167
+  m_SpotAngle: 50.549255
+  m_InnerSpotAngle: 34.768837
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0

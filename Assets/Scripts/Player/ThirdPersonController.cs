@@ -18,13 +18,16 @@ public class ThirdPersonController : MonoBehaviour
     [SerializeField] private float checkForEnemiesFrequency = 0.2f;
     [SerializeField] private LayerMask enemyMask = default;
 
+    [Header("Skills")]
+    [SerializeField] private float dashForce = 25f;
+    [SerializeField] private float dashCooldownInSeconds = 1f;
+
     [Header("Cinemachine")]
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     [SerializeField] private GameObject cinemachineCameraTarget;
 
     // cinemachine
     private float _cinemachineTargetYaw;
-    private float _cinemachineTargetPitch;
 
     // player
     private float _speed;
@@ -34,13 +37,17 @@ public class ThirdPersonController : MonoBehaviour
     private int _animIDSpeed;
     private int _animIDMotionSpeed;
 
+    //Shooting raycast
+    private const int maxColliders = 10;
+    Collider[] enemyColliders = new Collider[maxColliders];
+
+    //Skills
+    private bool dashAvailable = true;
+
     private Animator _animator;
     private CharacterController _controller;
     private StarterAssets.StarterAssetsInputs _input;
-    private GameObject _mainCamera;
-
-    private const int maxColliders = 10;
-    Collider[] enemyColliders = new Collider[maxColliders];
+    private GameObject _mainCamera;    
 
     private void Awake()
     {
@@ -93,7 +100,7 @@ public class ThirdPersonController : MonoBehaviour
         _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
 
         // Cinemachine will follow this target
-        cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
+        cinemachineCameraTarget.transform.rotation = Quaternion.Euler(0.0f, _cinemachineTargetYaw, 0.0f);
     }
 
     //This Coroutine updates the close enemies buffer collider every "checkForEnemiesFrequency" seconds
@@ -167,7 +174,7 @@ public class ThirdPersonController : MonoBehaviour
 
         // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is no input, set the target speed to 0
-        if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+        if (_input.move == Vector2.zero) targetSpeed = 0.0f;        
 
         // a reference to the players current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -201,6 +208,14 @@ public class ThirdPersonController : MonoBehaviour
         Vector3 targetDirection = _mainCamera.transform.TransformDirection(inputDirection);
         targetDirection.y = 0;
 
+        //Dash
+        if (_input.dash && dashAvailable)
+        {
+            StartCoroutine(DisableDash());
+            _controller.Move(targetDirection.normalized * dashForce * Time.deltaTime);
+            return;
+        }
+
         // move the player
         _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime));
 
@@ -210,6 +225,13 @@ public class ThirdPersonController : MonoBehaviour
             _animator.SetFloat(_animIDSpeed, _animationBlend);
             _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
         }
+    }
+
+    private IEnumerator DisableDash() 
+    {
+        dashAvailable = false;
+        yield return new WaitForSeconds(dashCooldownInSeconds);
+        dashAvailable = true;
     }
 
     private void OnDrawGizmos()

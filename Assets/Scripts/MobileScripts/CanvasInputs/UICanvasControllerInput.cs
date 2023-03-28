@@ -22,9 +22,9 @@ namespace StarterAssets
             starterAssetsInputs.ShootInput(virtualShootState);
         }
 
-        public void VirtualSprintInput(bool virtualSprintState)
+        public void VirtualDashInput(bool virtualDashState)
         {
-            //starterAssetsInputs.SprintInput(virtualSprintState);
+            starterAssetsInputs.DashInput(virtualDashState);
         }
         
     }

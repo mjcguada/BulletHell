@@ -11,6 +11,7 @@ namespace StarterAssets
 		public Vector2 move;
 		public Vector2 look;
 		public bool shoot;
+		public bool dash;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -20,6 +21,7 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 
 #if ENABLE_INPUT_SYSTEM
+
 		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
@@ -38,6 +40,10 @@ namespace StarterAssets
 			ShootInput(value.isPressed);
 		}
 
+		public void OnDash(InputValue value)
+		{
+			DashInput(value.isPressed);
+		}
 
 #endif
 
@@ -56,15 +62,10 @@ namespace StarterAssets
 			shoot = newShootState;
 		}
 
-		//private void OnApplicationFocus(bool hasFocus)
-		//{
-		//	SetCursorState(cursorLocked);
-		//}
-
-		//private void SetCursorState(bool newState)
-		//{
-		//	Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-		//}
+		public void DashInput(bool newDashState)
+		{
+			dash = newDashState;
+		}
 	}
 	
 }

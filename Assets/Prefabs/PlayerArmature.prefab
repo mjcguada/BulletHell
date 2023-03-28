@@ -1124,6 +1124,8 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 256
+  dashForce: 50
+  dashCooldownInSeconds: 1
   cinemachineCameraTarget: {fileID: 8338988566280778634}
 --- !u!114 &135756642000475821
 MonoBehaviour:
@@ -1140,6 +1142,7 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
   shoot: 0
+  dash: 0
   analogMovement: 0
   cursorLocked: 0
   cursorInputForLook: 1
