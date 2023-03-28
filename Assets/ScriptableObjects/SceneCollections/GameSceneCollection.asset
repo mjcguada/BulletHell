@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d36ae8809a2b2564199183a45bd57683, type: 3}
+  m_Name: GameSceneCollection
+  m_EditorClassIdentifier: 
+  scenes:
+  - sceneAsset: {fileID: 102900000, guid: d67c236f852d4d94489f385932a73748, type: 3}
+    sceneName: Scenes/MainGame
+  - sceneAsset: {fileID: 102900000, guid: 445a544ae46685141b4d21284cc128e6, type: 3}
+    sceneName: Scenes/RetroCity

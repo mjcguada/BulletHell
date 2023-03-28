@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private bool loadOnAwake = false;
+    [SerializeField] private LoadSceneMode loadMode = LoadSceneMode.Additive;
     [SerializeField] protected SceneCollection sceneCollection;
 
     private void Awake()
@@ -26,7 +27,7 @@ public class SceneLoader : MonoBehaviour
             string currentScene = sceneCollection.scenes[i];
             if (!string.IsNullOrEmpty(currentScene) && !loadedScenes.Contains(currentScene)) ;
             {
-                SceneManager.LoadScene(currentScene, LoadSceneMode.Additive);
+                SceneManager.LoadScene(currentScene, loadMode);
                 loadedScenes.Add(currentScene);
             }
         }
@@ -45,7 +46,7 @@ public class SceneLoader : MonoBehaviour
             string currentScene = sceneCollection.scenes[i];
             if (!string.IsNullOrEmpty(currentScene) && !loadedScenes.Contains(currentScene)) ;
             {
-                SceneManager.LoadSceneAsync(currentScene, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync(currentScene, loadMode);
                 loadedScenes.Add(currentScene);
             }
         }
