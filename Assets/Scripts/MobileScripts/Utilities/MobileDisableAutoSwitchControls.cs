@@ -15,21 +15,21 @@ using UnityEngine.InputSystem;
 public class MobileDisableAutoSwitchControls : MonoBehaviour
 {
     
-#if ENABLE_INPUT_SYSTEM && (UNITY_IOS || UNITY_ANDROID)
+//#if ENABLE_INPUT_SYSTEM && (UNITY_IOS || UNITY_ANDROID)
 
-    [Header("Target")]
-    public PlayerInput playerInput;
+//    [Header("Target")]
+//    public PlayerInput playerInput;
 
-    void Start()
-    {
-        DisableAutoSwitchControls();
-    }
+//    void Start()
+//    {
+//        DisableAutoSwitchControls();
+//    }
 
-    void DisableAutoSwitchControls()
-    {
-        playerInput.neverAutoSwitchControlSchemes = true;
-    }
+//    void DisableAutoSwitchControls()
+//    {
+//        playerInput.neverAutoSwitchControlSchemes = true;
+//    }
 
-#endif
+//#endif
     
 }

@@ -82,4 +82,9 @@ public class Enemy : MonoBehaviour, IReseteable
         myMeshRenderer.material = originalMaterial;
         gameObject.SetActive(false);
     }
+
+    private void OnDisable() 
+    {
+        EnemyManager.Instance.RemoveFromActiveEnemies(this);
+    }
 }

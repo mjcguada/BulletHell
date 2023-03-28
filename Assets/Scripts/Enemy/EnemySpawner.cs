@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
             enemyPosition.y = groundPosition;
 
             Enemy newEnemy = EnemyManager.Instance.GetEnemy();
-            newEnemy.transform.position = enemyPosition;
+            if(newEnemy != null) newEnemy.transform.position = enemyPosition;
 
             yield return new WaitForSeconds(frequenceInSeconds);
         }

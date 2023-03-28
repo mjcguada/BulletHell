@@ -6,10 +6,14 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
     
+    [Header("Settings")]
+    [SerializeField] private int maxEnemies = 40;
+
     [Header("Prefabs")]
     [SerializeField] private Enemy enemyPrefab;
 
     private ObjectPooler<Enemy> enemyPool;
+    private List<Enemy> activeEnemies = new List<Enemy>();
 
     private PlayerHealth playerReference;
     public PlayerHealth PlayerReference => playerReference ??= FindObjectOfType<PlayerHealth>();
@@ -22,9 +26,29 @@ public class EnemyManager : MonoBehaviour
 
     public Enemy GetEnemy()
     {
+        if (activeEnemies.Count >= maxEnemies) return null;
+
         Enemy enemy = enemyPool.GetObject();
         enemy.AssignPlayerReference(PlayerReference);
         enemy.gameObject.SetActive(true);
+
+        AddToActiveEnemies(enemy);
         return enemy;
+    }
+
+    private void AddToActiveEnemies(Enemy enemyToAdd)
+    {
+        if (!activeEnemies.Contains(enemyToAdd))
+        {
+            activeEnemies.Add(enemyToAdd);
+        }
+    }
+
+    public void RemoveFromActiveEnemies(Enemy enemyToRemove)
+    {
+        if (activeEnemies.Contains(enemyToRemove))
+        {
+            activeEnemies.Remove(enemyToRemove);
+        }
     }
 }
