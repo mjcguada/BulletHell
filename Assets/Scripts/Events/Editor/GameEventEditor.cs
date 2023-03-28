@@ -5,6 +5,8 @@
 // Date:   10/04/17
 // ----------------------------------------------------------------------------
 
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEngine;
 
@@ -22,3 +24,4 @@ public class EventEditor : Editor
             e.Raise();
     }
 }
+#endif
