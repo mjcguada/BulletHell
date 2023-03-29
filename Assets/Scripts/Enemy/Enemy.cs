@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour, IReseteable
 
     private void OnEnable()
     {
+        health = StartingHealth.Value;
         StartCoroutine(FollowPlayerCoroutine());
     }
 
@@ -79,8 +80,7 @@ public class Enemy : MonoBehaviour, IReseteable
 
     //IReseteable interface
     public void Reset()
-    {
-        health = StartingHealth.Value;
+    {        
         myMeshRenderer.material = originalMaterial;
         gameObject.SetActive(false);
     }
