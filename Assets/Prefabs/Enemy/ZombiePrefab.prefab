@@ -1923,7 +1923,7 @@ GameObject:
   - component: {fileID: -3657024260090639981}
   - component: {fileID: 1491295230834174070}
   m_Layer: 8
-  m_Name: Zombie
+  m_Name: ZombiePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2000,7 +2000,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 2
 --- !u!135 &5536663767690856450
 SphereCollider:
   m_ObjectHideFlags: 0

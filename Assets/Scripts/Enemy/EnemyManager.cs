@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance;
     
     [Header("Settings")]
-    [SerializeField] private int maxEnemies = 40;
+    [SerializeField] private int maxEnemies = 30;
 
     [Header("Prefabs")]
     [SerializeField] private Enemy enemyPrefab;
@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        enemyPool = new ObjectPooler<Enemy>(transform, enemyPrefab, 20);
+        enemyPool = new ObjectPooler<Enemy>(transform, enemyPrefab, maxEnemies);
     }
 
     public Enemy GetEnemy()
