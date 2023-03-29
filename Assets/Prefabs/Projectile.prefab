@@ -250,6 +250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageAmount:
-    UseConstant: 1
+    UseConstant: 0
     ConstantValue: 1
-    Variable: {fileID: 0}
+    Variable: {fileID: 11400000, guid: 94f0e21b962e89e46b2a3aa87f26b6d7, type: 2}

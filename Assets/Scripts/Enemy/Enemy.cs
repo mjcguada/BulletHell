@@ -6,13 +6,14 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IReseteable
 {
+    public FloatReference StartingHealth;
+
     [SerializeField] private Material damageMaterial;
+    
+    private float health;
 
     private NavMeshAgent navMeshAgent;
     private PlayerHealth playerReference;
-
-    //TODO: establish from the EnemyManager
-    private int health = 4;
 
     private Material originalMaterial;
     private SkinnedMeshRenderer myMeshRenderer;
@@ -53,16 +54,16 @@ public class Enemy : MonoBehaviour, IReseteable
         DamageDealer damage = other.gameObject.GetComponent<DamageDealer>();
         if (damage != null)
         {
-            ReceiveDamage();            
+            ReceiveDamage(damage.DamageAmount.Value);            
         }
     }
 
-    private void ReceiveDamage() 
+    private void ReceiveDamage(float damageValue) 
     {
         if(blinkCoroutine != null) StopCoroutine(blinkCoroutine);
         blinkCoroutine = StartCoroutine(ChangeToDamagedMaterial());
 
-        health--;
+        health -= damageValue;
         if (health <= 0)
         {
             Reset();
@@ -79,6 +80,7 @@ public class Enemy : MonoBehaviour, IReseteable
     //IReseteable interface
     public void Reset()
     {
+        health = StartingHealth.Value;
         myMeshRenderer.material = originalMaterial;
         gameObject.SetActive(false);
     }
